@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const IsiTours = (props) => {
-    const {id,image,info,price,name} = props;
+    const {id,image,info,price,name, hapus} = props;
 
     const [readBanyak,setReadBanyak] = useState(false);
 
@@ -18,7 +18,7 @@ const IsiTours = (props) => {
             {readBanyak===true ? 'Show Less' : "Show More"}
         </button>
 
-        <button className='delete-btn'>Not Interested</button>
+        <button className='delete-btn' onClick={()=>{hapus(id)}}>Not Interested</button>
          </footer>
     </article>
   )
