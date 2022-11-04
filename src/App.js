@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import Loading from './Loading';
+import { useEffect, useState } from 'react';
+import Tours from './Tours';
+
+const url = 'https://course-api.com/react-tours-project'
 
 function App() {
+  const [loading,setLoading] = useState(true);
+  const [travel,setTravel] = useState([]);
+
+  const ambilTravel = async()=>{
+    setLoading(true);
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setTravel(data);
+      setLoading(false);
+       
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    ambilTravel();
+  },[])
+
+  if(loading===true){
+    return (
+      <main>
+        <Loading />
+      </main>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Tours apayak={travel} />
+    </main>
   );
 }
 
