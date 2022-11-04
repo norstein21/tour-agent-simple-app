@@ -23,6 +23,11 @@ function App() {
     }
   }
 
+  const hapusArtikel = (id) =>{
+    const newData = travel.filter((data)=> data.id !== id);
+    setTravel(newData);
+  }
+
   useEffect(()=>{
     ambilTravel();
   },[])
@@ -35,9 +40,20 @@ function App() {
     );
   }
 
+  if (travel.length === 0){
+    return (
+      <main>
+        <div className='title'>
+          <h2>Artikel habis...</h2>
+          <button className='btn' onClick={ambilTravel}>Refresh</button>
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main>
-      <Tours apayak={travel} />
+      <Tours apayak={travel} hapus={hapusArtikel} />
     </main>
   );
 }

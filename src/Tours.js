@@ -1,8 +1,11 @@
 import React from 'react'
 import IsiTours from './IsiTours'
 
-function Tours({apayak}) {
+function Tours(props) {
+    const {apayak, hapus} = props;
     console.log('tourr',apayak)
+
+
   return (
     <section>
         <div className='title'>
@@ -12,7 +15,7 @@ function Tours({apayak}) {
         </div>
         <div>
             {apayak.map((t)=>{
-                return <IsiTours key={t.id} {...t} />
+                return <IsiTours key={t.id} {...t} hapus={hapus} />
             })}
         </div>
     </section>
